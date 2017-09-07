@@ -1,0 +1,43 @@
+#Hands-on Exercise 2
+#Problem 1
+#Part 1. Download a CSV file from OECD
+#Part 2 :Read CSV file
+#Part 3 :Remove the last row
+
+#Start of problem 1
+
+#Read the OECD file into a data frame
+oecddata_csv <- read.csv(file="C:/Users/Admin/Desktop/AMMA/DP_LIVE_08072017230634515.csv")
+oecddata_scv <- head(oecddata_csv,-1)
+
+#End of problem 1
+
+
+#Problem 2
+#Read 2 tables from Wikipedia
+#Find the no of ODIs won by India
+
+#Start of problem 2
+
+page_url = "https://en.wikipedia.org/wiki/India%E2%80%93Pakistan_cricket_rivalry"
+
+star=read_html(page_url)
+
+#Parse the HTML file to get the table node
+
+table1=html_nodes(star,"table")
+
+#Save table1 in a separate table variable 
+table2<-html_table(table[2],fill=TRUE)
+
+#Convert to a data frame
+table1.df <- as.data.frame(table2)
+
+#View the data frame
+View(table1.df)
+
+ODI_won= table1.df$ODI[3]
+
+cat(ODI_won,"- No. of ODIs won by India")
+
+
