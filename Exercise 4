@@ -1,0 +1,85 @@
+#Exercise - 4
+#Analyse the student performance in Math by downloading https://archive.ics.uci.edu/ml/datasets/student+performance datasets 
+#Unzip the file to a folder and read the data
+
+#Q(1) Answer following questions -
+  #a) What is average Grades for Male and Female students
+  #b) Which combination of Guardian and Sudent Gender has highest Grades for G1, G2 and G3
+#Q(2) Students Absences (variable: absences) can be broken into 4 or 5 groups each group has almost same
+#% students (hint cut and quantile)
+#And then find average Grades for different level of absences
+
+#Get current working directory
+getwd()
+
+#Change the working directory to the the where datasets are present 
+setwd("C:/Users/Admin/Desktop/AMMA")
+
+#Read the two datasets
+data_1=read.table("student-mat.csv",sep=";",header=TRUE)
+data_2=read.table("student-por.csv",sep=";",header=TRUE)
+
+#Merge the two datasets
+data_3=merge(data_1,data_2,by=c("school","sex","age","address","famsize","Pstatus","Medu","Fedu","Mjob","Fjob","reason","nursery","internet"))
+
+
+View(data_1)
+View(data_2)
+class(data_3)
+
+#Initialize the variables for mean grade for males and females
+grade_f_mean=0
+grade_m_mean=0
+
+for(i in 1:length(data_3$G3.x))
+{
+  if(data_3$sex[i]=="F")
+  {  grade_f_mean = grade_f_mean + data_3$G3.x[i] + data_3$G3.y[i]
+  }
+  else
+  {
+    grade_m_mean = grade_m_mean + data_3$G3.x[i] + data_3$G3.y[i]
+  }
+}
+grade_m_mean = grade_m_mean/length(data_3$G3.x)
+grade_f_mean = grade_f_mean/length(data_3$G3.x)
+
+grade_m_mean
+grade_f_mean 
+
+
+#Find the highest grades
+
+maximum_G1 = max(data_3$G1.x + d3$G1.y)
+maximum_G2 = max(data_3$G2.x + d3$G2.y)
+maximum_G3 = max(data_3$G3.x + d3$G3.y)
+
+for(j in 1:length(data_3$G3.x))
+{  
+  if(data_3$G1.x[j]+data_3$G1.y[j] == maximum_G1)
+  {Guardian_G1 = data_3$guardian.x[j]
+  Gender_G1 = data_3$sex[j]
+  }
+}  
+Guardian_G1
+Gender_G1
+
+for(j in 1:length(data_3$G3.x))
+{  
+  if(data_3$G2.x[j]+data_3$G2.y[j] == maximum_G1)
+  {Guardian_G2 = data_3$guardian.x[j]
+  Gender_G2 = data_3$sex[j]
+  }
+}  
+Guardian_G2
+Gender_G2
+
+for(j in 1:length(data_3$G3.x))
+{  
+  if(data_3$G3.x[j]+data_3$G3.y[j] == maximum_G1)
+  {Guardian_G3 = data_3$guardian.x[j]
+  Gender_G3 = data_3$sex[j]
+  }
+}  
+Guardian_G3
+Gender_G3
